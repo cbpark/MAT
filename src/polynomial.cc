@@ -2,6 +2,7 @@
 
 #include <array>
 #include <functional>
+#include <vector>
 
 std::array<double, 5> coeffQuartic(std::function<double(double)> f,
                                    const std::array<double, 4>& xs) {
@@ -47,4 +48,9 @@ std::array<double, 5> coeffQuartic(std::function<double(double)> f,
         e * (xs[1] * p34 + xs[2] * p14 + xs[3] * p12 + xs[0] * p23) / p1234;
 
     return {e, d, c, b, a};
+}
+
+std::vector<double> quarticEqSol(std::function<double(double)> f,
+                                 const std::array<double, 4>& xs, double eps) {
+    return {0};
 }
