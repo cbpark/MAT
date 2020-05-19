@@ -11,6 +11,10 @@ LIB    := $(LIBDIR)/lib$(PKGNAME).a
 LIBSRC := $(wildcard $(SRCDIR)/*.cc)
 LIBOBJ := $(LIBSRC:.cc=.o)
 
+# GSL (https://www.gnu.org/software/gsl/)
+CXXFLAGS += $(shell gsl-config --cflags)
+LDFLAGS  += $(shell gsl-config --libs)
+
 .PHONY: all build clean
 
 all: $(LIB)

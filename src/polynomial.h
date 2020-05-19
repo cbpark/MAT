@@ -1,0 +1,4 @@
+#ifndef MAT_SRC_POLYNOMIAL_H_
+#define MAT_SRC_POLYNOMIAL_H_
+
+#endif  // MAT_SRC_POLYNOMIAL_H_
