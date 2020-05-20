@@ -10,6 +10,7 @@ RM       := rm -f
 LIB    := $(LIBDIR)/lib$(PKGNAME).a
 LIBSRC := $(wildcard $(SRCDIR)/*.cc)
 LIBOBJ := $(LIBSRC:.cc=.o)
+EXE    := examples/mat
 
 # GSL (https://www.gnu.org/software/gsl/)
 CXXFLAGS += $(shell gsl-config --cflags)
@@ -17,7 +18,7 @@ LDFLAGS  += $(shell gsl-config --libs)
 
 .PHONY: all build clean
 
-all: $(LIB)
+all: $(LIB) $(EXE)
 
 $(LIB): CXXFLAGS += -fPIC
 $(LIB): $(LIBOBJ)
@@ -25,6 +26,9 @@ $(LIB): $(LIBOBJ)
 	$(AR) $@ $^
 	ranlib $@
 
+examples/%: $(LIB) examples/%.o
+	$(CXX) $(LDFLAGS) -o $@ $^
+
 clean::
-	$(RM) $(LIBOBJ) $(LIB)
+	$(RM) $(EXE) $(LIBOBJ) $(LIB)
 	$(RM) -r $(LIBDIR)
