@@ -1,6 +1,9 @@
 #include "polynomial.h"
 
+#include <gsl/gsl_poly.h>
+
 #include <array>
+#include <cstdio>
 #include <functional>
 #include <vector>
 
@@ -50,10 +53,20 @@ std::array<double, 5> coeffQuartic(std::function<double(double)> f,
     return {e, d, c, b, a};
 }
 
-std::vector<double> quarticEqSol(std::function<double(double)> f,
-                                 const std::array<double, 4>& xs, double eps) {
-    std::vector<double> sol;
-    auto coeff = coeffQuartic(f, xs);
-    for (const auto& c : coeff) { sol.push_back(c); }
-    return sol;
+std::vector<double> mat::quarticEqSol(std::function<double(double)> f,
+                                      const std::array<double, 4>& xs,
+                                      double eps) {
+    const auto coeff = coeffQuartic(f, xs);
+
+    const auto a = coeff.data();
+    auto w = gsl_poly_complex_workspace_alloc(5);
+    double z[8];
+    gsl_poly_complex_solve(a, 5, w, z);
+    gsl_poly_complex_workspace_free(w);
+
+    for (int i = 0; i < 4; i++) {
+        std::printf("z%d = %+.18f %+.18f\n", i, z[2 * i], z[2 * i + 1]);
+    }
+
+    return {0};
 }

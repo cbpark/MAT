@@ -16,6 +16,6 @@ double func1(double x) {
 int main() {
     std::cout << "hello, world!\n";
     std::array<double, 4> xs = {1, 10, 100, 1000};
-    auto coeff = quarticEqSol(func1, xs, 1.0e-8);
+    auto coeff = mat::quarticEqSol(func1, xs, 1.0e-8);
     for (const auto& c : coeff) { std::cout << c << '\n'; }
 }
