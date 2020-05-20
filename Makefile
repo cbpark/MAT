@@ -26,8 +26,8 @@ $(LIB): $(LIBOBJ)
 	$(AR) $@ $^
 	ranlib $@
 
-examples/%: $(LIB) examples/%.o
-	$(CXX) $(LDFLAGS) -o $@ $^
+examples/%: examples/%.o $(LIB)
+	$(CXX) $(LDFLAGS) -o $@ $< -L$(LIBDIR) -l$(PKGNAME)
 
 clean::
 	$(RM) $(EXE) $(LIBOBJ) $(LIB)

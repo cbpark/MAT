@@ -52,5 +52,8 @@ std::array<double, 5> coeffQuartic(std::function<double(double)> f,
 
 std::vector<double> quarticEqSol(std::function<double(double)> f,
                                  const std::array<double, 4>& xs, double eps) {
-    return {0};
+    std::vector<double> sol;
+    auto coeff = coeffQuartic(f, xs);
+    for (const auto& c : coeff) { sol.push_back(c); }
+    return sol;
 }
