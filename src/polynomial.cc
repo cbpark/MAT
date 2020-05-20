@@ -3,7 +3,7 @@
 #include <gsl/gsl_poly.h>
 
 #include <array>
-#include <cstdio>
+#include <cmath>
 #include <functional>
 #include <vector>
 
@@ -64,9 +64,9 @@ std::vector<double> mat::quarticEqSol(std::function<double(double)> f,
     gsl_poly_complex_solve(a, 5, w, z);
     gsl_poly_complex_workspace_free(w);
 
-    for (int i = 0; i < 4; i++) {
-        std::printf("z%d = %+.18f %+.18f\n", i, z[2 * i], z[2 * i + 1]);
+    std::vector<double> sol;
+    for (auto i = 0; i < 4; ++i) {
+        if (std::abs(z[2 * i + 1]) < eps) { sol.push_back(z[2 * i]); }
     }
-
-    return {0};
+    return sol;
 }
