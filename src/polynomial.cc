@@ -59,9 +59,10 @@ std::vector<double> mat::quarticEqSol(std::function<double(double)> f,
     const auto coeff = coeffQuartic(f, xs);
 
     const auto a = coeff.data();
-    auto w = gsl_poly_complex_workspace_alloc(5);
+    const auto size = coeff.size();
+    auto w = gsl_poly_complex_workspace_alloc(size);
     double z[8];
-    gsl_poly_complex_solve(a, 5, w, z);
+    gsl_poly_complex_solve(a, size, w, z);
     gsl_poly_complex_workspace_free(w);
 
     std::vector<double> sol;
