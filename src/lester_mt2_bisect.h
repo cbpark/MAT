@@ -6,7 +6,7 @@
  *    * made more portable by removal of use of __FILE__ and __LINE__ macros in debug statement
  *    * made fewer demands on poor C++ compilers (ROOT5/CINT) by removal of certain inline statements
  *    * added this changelog!
- * 
+ *
  *  version 4: arXiv:1411.4312v4
  *    * added copyright information
  *
@@ -34,14 +34,14 @@
  *
  *   You might also need to cite:
  *
- *   http://arxiv.org/abs/hep-ph/9906349 
+ *   http://arxiv.org/abs/hep-ph/9906349
  *   Journal reference: Phys.Lett.B463:99-103,1999
  *   DOI: 10.1016/S0370-2693(99)00945-4
  *
- *   as the paper defining MT2. 
+ *   as the paper defining MT2.
  *
  * Here is an example of it's use:
- 
+
 
 double mVisA = 10; // mass of visible object on side A.  Must be >=0.
 double pxA = 20; // x momentum of visible object on side A.
@@ -248,13 +248,13 @@ bool __private_ellipsesAreDisjoint(const double coeffLamPow3, const double coeff
   {
     const double thing1 = -3.0*b + a*a;
     const double thing2 = -27.0*c*c + 18.0*c*a*b + a*a*b*b - 4.0*a*a*a*c - 4.0*b*b*b;
-    std::cout 
+    std::cout
       << (thing1>0) << " && " << (thing2>0) << " && [[ " << (a>=0) << " " << (3.0*a*c + b*a*a - 4.0*b*b<0)  << " ] or "
       << "[ " << (a< 0)   << " ] =("<< ((a >= 0 /*&& thing1 > 0*/ && 3.0*a*c + b*a*a - 4.0*b*b< 0 /*&& thing2 > 0*/) ||
                                  (a <  0 /*&& thing1 > 0*/                                 /*&& thing2 > 0*/)) << ")] " << (
           ( (a >= 0 && thing1 > 0 && 3.0*a*c + b*a*a - 4.0*b*b< 0 && thing2 > 0) ||
                                  (a <  0 && thing1 > 0                                 && thing2 > 0))
-          
+
           ) << std::endl;
   }
 #endif
@@ -318,11 +318,11 @@ class asymm_mt2_lester_bisect {
     }
     return sqrt(mT2_Sq);
   }
-  
+
   static void disableCopyrightMessage(const bool printIfFirst=false) {
     static bool first = true;
     if (first && printIfFirst) {
-    std::cout 
+    std::cout
       << "\n\n"
       << "#=========================================================\n"
       << "# To disable this message, place a call to \n"
@@ -548,12 +548,12 @@ double MT(double px1, double px2, double py1, double py2, double m1 , double m2)
 
 std::pair <double,double>  ben_findsols(double MT2, double px, double py, double visM, double Ma, double pxb, double pyb, double metx, double mety, double visMb, double Mb){
 
-  //Visible particle (px,py,visM)                                                                                                                  
+  //Visible particle (px,py,visM)
   std::pair <double,double> sols;
 
-  ///////                                                                                                                                          
-  //Find the minimizing points given MT2                                                                                                           
-  //////                      
+  ///////
+  //Find the minimizing points given MT2
+  //////
 
   double Pt = sqrt(px*px+py*py);
   double E = sqrt(Pt*Pt+visM*visM);
@@ -575,11 +575,14 @@ std::pair <double,double>  ben_findsols(double MT2, double px, double py, double
   double TermSqy1 = -4.*E4*py+4.*E2*M2*py-4.*E2*Ma2*py+4.*E2*px2*py+4.*E2*py3;
   double TermSqy2 = -4.*E4+4.*E2*px2+4.*E2*py2;
 
-  //First, determine the range.                                                                                                                   
+  //First, determine the range.
   double myx = 0.;
   double myy = 0.;
   if (TermSqy1*TermSqy1-4.*TermSqy0*TermSqy2 < 0){
-    //unbalanced                                                                                                                                 
+    //unbalanced
+      const double r = Ma / visM;
+      myx = r * px;
+      myy = r * py;
   }
   else{
     double sol1 = (-TermSqy1 - sqrt(TermSqy1*TermSqy1-4.*TermSqy0*TermSqy2))/(2.*TermSqy2);
@@ -602,14 +605,14 @@ std::pair <double,double>  ben_findsols(double MT2, double px, double py, double
       double mt2a = MT(pxb,metpxb,pyb,mety-metpy,visMb,Mb);
       double mt2b = MT(pxb,metpx2b,pyb,mety-metpy,visMb,Mb);
       if (fabs(mt1a-mt2a) < myclose){
-	myclose = fabs(mt1a-mt2a);
-	myy = metpy;
-	myx = metpx;
+        myclose = fabs(mt1a-mt2a);
+        myy = metpy;
+        myx = metpx;
       }
       if (fabs(mt1b-mt2b) < myclose){
-	myclose = fabs(mt1b-mt2b);
-	myy = metpy;
-	myx = metpx2;
+        myclose = fabs(mt1b-mt2b);
+        myy = metpy;
+        myx = metpx2;
       }
     }
   }
@@ -622,31 +625,3 @@ std::pair <double,double>  ben_findsols(double MT2, double px, double py, double
 }
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

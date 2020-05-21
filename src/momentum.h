@@ -1,6 +1,9 @@
 #ifndef MAT_SRC_MOMENTUM_H_
 #define MAT_SRC_MOMENTUM_H_
 
+#include <cmath>
+#include <ostream>
+
 namespace mat {
 
 class FourMomentum {
@@ -17,13 +20,22 @@ public:
     double py() const { return y_; }
     double pz() const { return z_; }
 
-    double m2() const  {
-        return t_ * t_ - x_ * x_ - y_ * y_ - z_ * z_;
+    double m2() const { return t_ * t_ - x_ * x_ - y_ * y_ - z_ * z_; }
+
+    double m() const {
+        const double mSq = m2();
+        return mSq >= 0 ? std::sqrt(mSq) : 0;
+    }
+
+    double transverseEnergy() const {
+        return std::sqrt(x_ * x_ + y_ * y_ + m2());
     }
 
     double dot(const FourMomentum& p) const {
         return e() * p.e() - px() * p.px() - py() * p.py() - pz() * p.pz();
     }
+
+    friend std::ostream& operator<<(std::ostream& os, const FourMomentum& p);
 };
 }  // namespace mat
 

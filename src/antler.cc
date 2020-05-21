@@ -1,4 +1,5 @@
 #include "antler.h"
+#include "maos.h"
 #include "matrix.h"
 #include "momentum.h"
 #include "polynomial.h"
@@ -71,8 +72,10 @@ auto deltaATFunc(const mat::FourMomentum& p1, const mat::FourMomentum& p2,
 double sqrt0(double x) { return x < 0 ? 1.0e+10 : std::sqrt(x); }
 
 std::vector<double> mat::mAT(const mat::FourMomentum& p1,
-                             const mat::FourMomentum& p2, double mA, double mB,
-                             double qx, double qy, double qz) {
+                             const mat::FourMomentum& p2, double metx,
+                             double mety, double qz, double mA, double mB) {
+    const double qx = p1.px() + p2.px() + metx;
+    const double qy = p1.py() + p2.py() + mety;
     auto f = deltaATFunc(p1, p2, mA, mB, qx, qy, qz);
     const std::array<double, 4> inps = {mA, 10 * mA, 100 * mA, 1000 * mA};
     auto sols = mat::quarticEqSol(f, inps, 1.0e-3);
@@ -83,7 +86,26 @@ std::vector<double> mat::mAT(const mat::FourMomentum& p1,
 
     // remove zero solutions.
     sols.erase(std::remove_if(sols.begin(), sols.end(),
-                              [](double s) { return std::abs(s) < 1.0e-8; }),
+                              [](double s) { return std::abs(s) < 1.0e-4; }),
                sols.end());
     return sols;
+}
+
+std::vector<double> mat::mATmaos(const mat::FourMomentum& p1,
+                                 const mat::FourMomentum& p2, double metx,
+                                 double mety, double mA, double mB) {
+    const double qz_ = p1.pz() + p2.pz();
+    std::vector<double> qz;
+    auto maosSols = mat::maos(p1, p2, metx, mety, mA, mB);
+    for (const auto& s : maosSols) {
+        qz.push_back(qz_ + s.first.pz() + s.second.pz());
+    }
+
+    std::vector<double> mATs;
+    for (const auto& qzSol : qz) {
+        const auto mATs_ = mat::mAT(p1, p2, metx, mety, qzSol, mA, mB);
+        mATs.insert(mATs.end(), mATs_.cbegin(), mATs_.cend());
+    }
+    std::sort(mATs.begin(), mATs.end());
+    return mATs;
 }
