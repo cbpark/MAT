@@ -1,6 +1,7 @@
 #ifndef MAT_SRC_MATRIX_H_
 #define MAT_SRC_MATRIX_H_
 
+namespace mat {
 class Matrix22 {
 private:
     double a_, b_, c_, d_;
@@ -12,5 +13,6 @@ public:
 
     double det() const { return a_ * d_ - b_ * c_; }
 };
+}  // namespace mat
 
 #endif  // MAT_SRC_MATRIX_H_

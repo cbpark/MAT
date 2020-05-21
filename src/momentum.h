@@ -17,6 +17,10 @@ public:
     double py() const { return y_; }
     double pz() const { return z_; }
 
+    double m2() const  {
+        return t_ * t_ - x_ * x_ - y_ * y_ - z_ * z_;
+    }
+
     double dot(const FourMomentum& p) const {
         return e() * p.e() - px() * p.px() - py() * p.py() - pz() * p.pz();
     }

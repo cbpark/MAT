@@ -7,6 +7,8 @@
 #include <functional>
 #include <vector>
 
+// #include <iostream>
+
 std::array<double, 5> coeffQuartic(std::function<double(double)> f,
                                    const std::array<double, 4>& xs) {
     const double f1 = f(xs[0]);
@@ -57,6 +59,9 @@ std::vector<double> mat::quarticEqSol(std::function<double(double)> f,
                                       const std::array<double, 4>& xs,
                                       double eps) {
     const auto coeff = coeffQuartic(f, xs);
+    // for (const auto & c : coeff) {
+    //     std::cout << "coeff = " <<  c << '\n';
+    // }
 
     const auto a = coeff.data();
     const auto size = coeff.size();
