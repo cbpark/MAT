@@ -6,6 +6,13 @@
 #include <vector>
 
 namespace mat {
+/**
+ * @param q the four-momentum of the resonance.
+ * @param p1 the four-momentum of the first visible particle.
+ * @param p2 the four-momentum of the second visible particle.
+ * @param mA the mass of the intermediate particle.
+ * @param mB the mass of the invisible particle in the final state.
+ */
 double deltaAT(const FourMomentum& q, const FourMomentum& p1,
                const FourMomentum& p2, const Mass& mA, const Mass& mB);
 

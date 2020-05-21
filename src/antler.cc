@@ -67,7 +67,7 @@ double mat::deltaAT(const FourMomentum& q, const FourMomentum& p1,
 auto deltaATFunc(const FourMomentum& p1, const FourMomentum& p2, double qx,
                  double qy, double qz, const Mass& mA, const Mass& mB) {
     return [=](double e) {
-        auto q = FourMomentum(e, qx, qy, qz);
+        const auto q = FourMomentum(e, qx, qy, qz);
         return mat::deltaAT(q, p1, p2, mA, mB) /
                (std::pow(mA.square(), 4) + 1.0e-12);
     };

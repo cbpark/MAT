@@ -12,7 +12,7 @@ LIBSRC := $(wildcard $(SRCDIR)/*.cc)
 LIBOBJ := $(LIBSRC:.cc=.o)
 EXE    := examples/mat
 
-DESTDIR ?= /usr/local/stow/MAT
+DESTDIR ?= /usr/local
 HEADERS := $(wildcard $(SRCDIR)/*.h)
 
 # GSL (https://www.gnu.org/software/gsl/)
