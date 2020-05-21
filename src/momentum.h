@@ -5,6 +5,12 @@
 #include <ostream>
 
 namespace mat {
+struct Mass {
+    double value;
+    Mass() : value(0) {}
+    explicit Mass(double v) : value(v) {}
+    double square() const { return value * value; }
+};
 
 class FourMomentum {
 private:

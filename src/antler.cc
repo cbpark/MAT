@@ -9,17 +9,19 @@
 #include <cmath>
 #include <vector>
 
+using Mass = mat::Mass;
+
 double mat::deltaAT(const mat::FourMomentum& q, const mat::FourMomentum& p1,
-                    const mat::FourMomentum& p2, double mA, double mB) {
+                    const mat::FourMomentum& p2, Mass mA, Mass mB) {
     const double qp1 = q.dot(p1);
     const double qp2 = q.dot(p2);
     const double qSq = q.m2();
 
-    const double deltaM = mA * mA - mB * mB;
+    const double deltaM = mA.square() - mB.square();
     const double mV1sq = p1.m2();
     const double mV2sq = p2.m2();
 
-    const double a00 = 2 * mA * mA;
+    const double a00 = 2 * mA.square();
     const double a01 = deltaM + mV1sq;
     const double a02 = -deltaM + 2 * qp2 - mV2sq;
     const double a03 = qSq;
@@ -62,10 +64,11 @@ double mat::deltaAT(const mat::FourMomentum& q, const mat::FourMomentum& p1,
 }
 
 auto deltaATFunc(const mat::FourMomentum& p1, const mat::FourMomentum& p2,
-                 double mA, double mB, double qx, double qy, double qz) {
+                 double qx, double qy, double qz, Mass mA, Mass mB) {
     return [=](double e) {
         auto q = mat::FourMomentum(e, qx, qy, qz);
-        return mat::deltaAT(q, p1, p2, mA, mB) / (std::pow(mA, 8) + 1.0e-12);
+        return mat::deltaAT(q, p1, p2, mA, mB) /
+               (std::pow(mA.square(), 4) + 1.0e-12);
     };
 }
 
@@ -73,11 +76,12 @@ double sqrt0(double x) { return x < 0 ? 1.0e+10 : std::sqrt(x); }
 
 std::vector<double> mat::mAT(const mat::FourMomentum& p1,
                              const mat::FourMomentum& p2, double metx,
-                             double mety, double qz, double mA, double mB) {
+                             double mety, double qz, Mass mA, Mass mB) {
     const double qx = p1.px() + p2.px() + metx;
     const double qy = p1.py() + p2.py() + mety;
-    auto f = deltaATFunc(p1, p2, mA, mB, qx, qy, qz);
-    const std::array<double, 4> inps = {mA, 10 * mA, 100 * mA, 1000 * mA};
+    auto f = deltaATFunc(p1, p2, qx, qy, qz, mA, mB);
+    const std::array<double, 4> inps = {mA.value, 10 * mA.value, 100 * mA.value,
+                                        1000 * mA.value};
     auto sols = mat::quarticEqSol(f, inps, 1.0e-3);
 
     const double q2 = qx * qx + qy * qy + qz * qz;
@@ -93,7 +97,7 @@ std::vector<double> mat::mAT(const mat::FourMomentum& p1,
 
 std::vector<double> mat::mATmaos(const mat::FourMomentum& p1,
                                  const mat::FourMomentum& p2, double metx,
-                                 double mety, double mA, double mB) {
+                                 double mety, Mass mA, Mass mB) {
     const double qz_ = p1.pz() + p2.pz();
     std::vector<double> qz;
     auto maosSols = mat::maos(p1, p2, metx, mety, mA, mB);
