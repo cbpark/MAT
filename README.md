@@ -23,7 +23,7 @@ Then, build the source by running `make`. It will create the `lib` directory, an
 
 ## How to use
 
-See the [`mat.cc`](./examples/mat.cc) file.
+See the [`mat.cc`](./examples/mat.cc) file. If you want to build it, run `make examples/mat`.
 
 ## References
 
@@ -62,5 +62,4 @@ For MAOS,
     pages = "031701",
     year = "2009"
 }
-
 ```
