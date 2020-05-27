@@ -27,6 +27,21 @@ See the [`mat.cc`](./examples/mat.cc) file. If you want to build it, run `make e
 
 ## References
 
+If you use this library, please cite the paper given below.
+
+```
+@article{Park:2020rol,
+    author = "Park, Chan Beom",
+    title = "{A singular way to search for heavy resonances in missing energy events}",
+    eprint = "2005.12297",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ph",
+    reportNumber = "CTPU-PTC-20-14",
+    month = "5",
+    year = "2020"
+}
+```
+
 This uses the [MT2](https://www.hep.phy.cam.ac.uk/~lester/mt2/) library, [`lester_mt2_bisect.h`](./src/lester_mt2_bisect.h), to calculate the MT2 variable. Therefore, please cite [arXiv:1411.4312](https://arxiv.org/abs/1411.4312) and [arXiv:0810.4853](https://arxiv.org/abs/0810.4853) if you use this code, in particular, the `mATmaos` function.
 
 For MT2,
