@@ -29,7 +29,7 @@ See the [`mat.cc`](./examples/mat.cc) file. If you want to build it, run `make e
 
 If you use this library, please cite the paper given below.
 
-```
+``` bibtex
 @article{Park:2020rol,
     author = "Park, Chan Beom",
     title = "{A singular way to search for heavy resonances in missing energy events}",
@@ -44,9 +44,9 @@ If you use this library, please cite the paper given below.
 
 This uses the [MT2](https://www.hep.phy.cam.ac.uk/~lester/mt2/) library, [`lester_mt2_bisect.h`](./src/lester_mt2_bisect.h), to calculate the MT2 variable. Therefore, please cite [arXiv:1411.4312](https://arxiv.org/abs/1411.4312) and [arXiv:0810.4853](https://arxiv.org/abs/0810.4853) if you use this code, in particular, the `mATmaos` function.
 
-For MT2,
+For the MT2 variable,
 
-```
+``` bibtex
 @article{Lester:2014yga,
     author = "Lester, Christopher G. and Nachman, Benjamin",
     title = "{Bisection-based asymmetric M$_{T2}$ computation: a higher precision calculator than existing symmetric methods}",
@@ -62,9 +62,9 @@ For MT2,
 }
 ```
 
-For MAOS,
+For the MAOS method,
 
-```
+``` bibtex
 @article{Cho:2008tj,
     author = "Cho, Won Sang and Choi, Kiwoon and Kim, Yeong Gyun and Park, Chan Beom",
     title = "{M(T2)-assisted on-shell reconstruction of missing momenta and its application to spin measurement at the LHC}",
