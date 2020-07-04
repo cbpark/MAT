@@ -9,7 +9,7 @@
 
 // #include <iostream>
 
-std::array<double, 5> coeffQuartic(std::function<double(double)> f,
+std::array<double, 5> coeffQuartic(mat::Polynomial f,
                                    const std::array<double, 4>& xs) {
     const double f1 = f(xs[0]);
     const double f2 = f(xs[1]);
@@ -55,7 +55,7 @@ std::array<double, 5> coeffQuartic(std::function<double(double)> f,
     return {e, d, c, b, a};
 }
 
-std::vector<double> mat::quarticEqSol(std::function<double(double)> f,
+std::vector<double> mat::quarticEqSol(mat::Polynomial f,
                                       const std::array<double, 4>& xs,
                                       double eps) {
     const auto coeff = coeffQuartic(f, xs);
