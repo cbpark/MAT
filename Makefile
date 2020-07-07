@@ -17,7 +17,7 @@ HEADERS := $(wildcard $(SRCDIR)/*.h)
 
 # GSL (https://www.gnu.org/software/gsl/)
 CXXFLAGS += $(shell gsl-config --cflags)
-LDFLAGS  += $(shell gsl-config --libs)
+LIBS     += $(shell gsl-config --libs)
 
 .PHONY: all install clean
 
@@ -36,7 +36,7 @@ install: $(LIB) $(HEADERS)
 	cp -a $(HEADERS) $(DESTDIR)/include/$(PKGNAME)
 
 examples/%: examples/%.o $(LIB)
-	$(CXX) $(LDFLAGS) -o $@ $< -L$(LIBDIR) -l$(PKGNAME)
+	$(CXX) $(LDFLAGS) -o $@ $< -L$(LIBDIR) -l$(PKGNAME) $(LIBS)
 
 clean::
 	$(RM) $(EXE) $(LIBOBJ) $(LIB)
