@@ -73,9 +73,7 @@ std::vector<std::pair<FourMomentum, FourMomentum>> mat::maos(
     std::vector<std::pair<FourMomentum, FourMomentum>> maosSols;
     if (!sols1.empty() && !sols2.empty()) {
         for (const auto &s1 : sols1) {
-            for (const auto &s2 : sols2) {
-                maosSols.push_back(std::make_pair(s1, s2));
-            }
+            for (const auto &s2 : sols2) { maosSols.push_back({s1, s2}); }
         }
     }
     return maosSols;
