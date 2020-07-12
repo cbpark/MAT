@@ -1,3 +1,7 @@
+/*
+ *  Copyright (c) 2020 Chan Beom Park <cbpark@gmail.com>
+ */
+
 #ifndef MAT_SRC_POLYNOMIAL_H_
 #define MAT_SRC_POLYNOMIAL_H_
 
@@ -8,7 +12,7 @@
 namespace mat {
 using Polynomial = std::function<double(double)>;
 
-std::vector<double> quarticEqSol(Polynomial f, const std::array<double, 4>& xs,
+std::vector<double> quarticEqSol(Polynomial f, const std::array<double, 4> &xs,
                                  double eps);
 }  // namespace mat
 

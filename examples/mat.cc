@@ -5,9 +5,9 @@
 #include <string>
 #include <vector>
 
-void printVar(const std::string& varname, const std::vector<double>& ms) {
+void printVar(const std::string &varname, const std::vector<double> &ms) {
     std::cout << varname << " = ";
-    for (const auto& m : ms) { std::cout << m << "  "; }
+    for (const auto &m : ms) { std::cout << m << "  "; }
     std::cout << '\n';
 }
 

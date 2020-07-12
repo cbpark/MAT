@@ -1,3 +1,7 @@
+/*
+ *  Copyright (c) 2020 Chan Beom Park <cbpark@gmail.com>
+ */
+
 #ifndef MAT_SRC_MATRIX_H_
 #define MAT_SRC_MATRIX_H_
 

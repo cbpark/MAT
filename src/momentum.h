@@ -1,3 +1,7 @@
+/*
+ *  Copyright (c) 2020 Chan Beom Park <cbpark@gmail.com>
+ */
+
 #ifndef MAT_SRC_MOMENTUM_H_
 #define MAT_SRC_MOMENTUM_H_
 
@@ -37,11 +41,11 @@ public:
         return std::sqrt(x_ * x_ + y_ * y_ + m2());
     }
 
-    double dot(const FourMomentum& p) const {
-        return e() * p.e() - px() * p.px() - py() * p.py() - pz() * p.pz();
+    double dot(const FourMomentum &p) const {
+        return t_ * p.e() - x_ * p.px() - y_ * p.py() - z_ * p.pz();
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const FourMomentum& p);
+    friend std::ostream &operator<<(std::ostream &os, const FourMomentum &p);
 };
 }  // namespace mat
 

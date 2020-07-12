@@ -1,3 +1,7 @@
+/*
+ *  Copyright (c) 2020 Chan Beom Park <cbpark@gmail.com>
+ */
+
 #include "polynomial.h"
 
 #include <gsl/gsl_poly.h>
@@ -10,7 +14,7 @@
 // #include <iostream>
 
 std::array<double, 5> coeffQuartic(mat::Polynomial f,
-                                   const std::array<double, 4>& xs) {
+                                   const std::array<double, 4> &xs) {
     const double f1 = f(xs[0]);
     const double f2 = f(xs[1]);
     const double f3 = f(xs[2]);
@@ -56,7 +60,7 @@ std::array<double, 5> coeffQuartic(mat::Polynomial f,
 }
 
 std::vector<double> mat::quarticEqSol(mat::Polynomial f,
-                                      const std::array<double, 4>& xs,
+                                      const std::array<double, 4> &xs,
                                       double eps) {
     const auto coeff = coeffQuartic(f, xs);
     // for (const auto & c : coeff) {

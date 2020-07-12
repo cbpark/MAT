@@ -1,19 +1,26 @@
+/*
+ *  Copyright (c) 2020 Chan Beom Park <cbpark@gmail.com>
+ */
+
 #include "antler.h"
-#include "maos.h"
-#include "matrix.h"
-#include "momentum.h"
-#include "polynomial.h"
 
 #include <algorithm>
 #include <array>
 #include <cmath>
 #include <vector>
 
+#include "maos.h"
+#include "matrix.h"
+#include "momentum.h"
+#include "polynomial.h"
+
+using std::vector;
+
 using FourMomentum = mat::FourMomentum;
 using Mass = mat::Mass;
 
-double mat::deltaAT(const FourMomentum& q, const FourMomentum& p1,
-                    const FourMomentum& p2, const Mass& mA, const Mass& mB) {
+double mat::deltaAT(const FourMomentum &q, const FourMomentum &p1,
+                    const FourMomentum &p2, const Mass &mA, const Mass &mB) {
     const double qp1 = q.dot(p1);
     const double qp2 = q.dot(p2);
     const double qSq = q.m2();
@@ -64,8 +71,8 @@ double mat::deltaAT(const FourMomentum& q, const FourMomentum& p1,
            m4.det() * m4_.det() - m5.det() * m5_.det() + m6.det() * m6_.det();
 }
 
-auto deltaATFunc(const FourMomentum& p1, const FourMomentum& p2, double qx,
-                 double qy, double qz, const Mass& mA, const Mass& mB) {
+auto deltaATFunc(const FourMomentum &p1, const FourMomentum &p2, double qx,
+                 double qy, double qz, const Mass &mA, const Mass &mB) {
     return [=](double e) {
         const auto q = FourMomentum(e, qx, qy, qz);
         return mat::deltaAT(q, p1, p2, mA, mB) /
@@ -75,10 +82,10 @@ auto deltaATFunc(const FourMomentum& p1, const FourMomentum& p2, double qx,
 
 double sqrt0(double x) { return x < 0 ? 1.0e+10 : std::sqrt(x); }
 
-std::vector<double> mat::mAT(const FourMomentum& p1, const FourMomentum& p2,
-                             double metx, double mety, double qz,
-                             const Mass& mA, const Mass& mB) {
-    std::vector<double> sols;
+vector<double> mat::mAT(const FourMomentum &p1, const FourMomentum &p2,
+                        double metx, double mety, double qz, const Mass &mA,
+                        const Mass &mB) {
+    vector<double> sols;
     if (mA.value <= 0) { return sols; }  // if mA <= 0, return empty values.
 
     const double qx = p1.px() + p2.px() + metx;
@@ -100,18 +107,18 @@ std::vector<double> mat::mAT(const FourMomentum& p1, const FourMomentum& p2,
     return sols;
 }
 
-std::vector<double> mat::mATmaos(const FourMomentum& p1, const FourMomentum& p2,
-                                 double metx, double mety, const Mass& mA,
-                                 const Mass& mB) {
+vector<double> mat::mATmaos(const FourMomentum &p1, const FourMomentum &p2,
+                            double metx, double mety, const Mass &mA,
+                            const Mass &mB) {
     const double qz_ = p1.pz() + p2.pz();
-    std::vector<double> qz;
+    vector<double> qz;
     auto maosSols = mat::maos(p1, p2, metx, mety, mA, mB);
-    for (const auto& s : maosSols) {
+    for (const auto &s : maosSols) {
         qz.push_back(qz_ + s.first.pz() + s.second.pz());
     }
 
-    std::vector<double> mATs;
-    for (const auto& qzSol : qz) {
+    vector<double> mATs;
+    for (const auto &qzSol : qz) {
         const auto mATs_ = mat::mAT(p1, p2, metx, mety, qzSol, mA, mB);
         mATs.insert(mATs.end(), mATs_.cbegin(), mATs_.cend());
     }
