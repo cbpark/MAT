@@ -2,7 +2,6 @@ PKGNAME  := MAT
 SRCDIR 	 := src
 LIBDIR 	 := lib
 CXXFLAGS := -g -O2 -Wall -Wextra -std=c++14 -pedantic -I$(SRCDIR) $(CXXFLAGS)
-LDFLAGS  := -O2
 AR       := ar crs
 MKDIR    := mkdir -p
 RM       := rm -f
