@@ -44,12 +44,12 @@ std::vector<FourMomentum> onShellSolution(const FourMomentum &vis, double pChix,
     if (det >= 0) {
         const double c = vis.e() * std::sqrt(det);
         double pChiz = (b + c) / a;
-        double eChi = std::sqrt(etChi * etChi + pChiz * pChiz);
-        sols.push_back(FourMomentum(eChi, pChix, pChiy, pChiz));
+        double eChi = std::hypot(etChi, pChiz);
+        sols.emplace_back(eChi, pChix, pChiy, pChiz);
 
         pChiz = (b - c) / a;
-        eChi = std::sqrt(etChi * etChi + pChiz * pChiz);
-        sols.push_back(FourMomentum(eChi, pChix, pChiy, pChiz));
+        eChi = std::hypot(etChi, pChiz);
+        sols.emplace_back(eChi, pChix, pChiy, pChiz);
     }
 
     return sols;
