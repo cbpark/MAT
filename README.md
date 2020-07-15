@@ -1,10 +1,13 @@
-# MAT
+MAT
+===
+
+[![Build Status](https://travis-ci.com/cbpark/MAT.svg?branch=master)](https://travis-ci.com/cbpark/MAT)
 
 A C++ implementation of [`mantler`](https://github.com/cbpark/mantler/), for reconstructing heavy resonances in the antler decay topology using the singularity variable.
 
 For Haskell users, see [`mantler`](https://github.com/cbpark/mantler/).
 
-# How to build
+## How to build
 
 Internally, [GNU Scientific Library](https://www.gnu.org/software/gsl/) (GSL) is used to solve polynomial equations. In order to build this from source, make sure that `gsl-config` is in the `PATH`.
 
