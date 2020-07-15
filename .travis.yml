@@ -7,10 +7,10 @@ compiler:
   - gcc
 addons:
   apt:
-    packages:
-      - libgsl-dev
+    packages: libgsl-dev
   homebrew:
-    packages:
-      - gsl
+    packages: gsl
+    update: true
 script:
   - make
+  - make examples/mat
