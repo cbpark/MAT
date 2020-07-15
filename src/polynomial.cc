@@ -56,7 +56,7 @@ std::array<double, 5> coeffQuartic(mat::Polynomial f,
         f4 * xs[0] * p23 / d4 -
         e * (xs[1] * p34 + xs[2] * p14 + xs[3] * p12 + xs[0] * p23) / p1234;
 
-    return {e, d, c, b, a};
+    return {{e, d, c, b, a}};
 }
 
 std::vector<double> mat::quarticEqSol(mat::Polynomial f,

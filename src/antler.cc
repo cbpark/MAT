@@ -91,8 +91,8 @@ vector<double> mat::mAT(const FourMomentum &p1, const FourMomentum &p2,
     const double qx = p1.px() + p2.px() + metx;
     const double qy = p1.py() + p2.py() + mety;
     auto f = deltaATFunc(p1, p2, qx, qy, qz, mA, mB);
-    const std::array<double, 4> inps = {mA.value, 10 * mA.value, 100 * mA.value,
-                                        1000 * mA.value};
+    const std::array<double, 4> inps{
+        {mA.value, 10 * mA.value, 100 * mA.value, 1000 * mA.value}};
     sols = mat::quarticEqSol(f, inps, 1.0e-3);
 
     const double q2 = qx * qx + qy * qy + qz * qz;
