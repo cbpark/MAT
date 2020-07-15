@@ -1,0 +1,16 @@
+language: cpp
+os:
+  - linux
+  - osx
+compiler:
+  - clang
+  - gcc
+addons:
+  apt:
+    packages:
+      - libgsl-dev
+  homebrew:
+    packages:
+      - gsl
+script:
+  - make
