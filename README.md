@@ -9,6 +9,11 @@ For Haskell users, see [`mantler`](https://github.com/cbpark/mantler/).
 
 ## How to build
 
+The C++ compiler must support **C++14** features. See [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support) and
+
+* [C++ Standards Support in GCC](https://gcc.gnu.org/projects/cxx-status.html),
+* [C++ Support in Clang](https://clang.llvm.org/cxx_status.html).
+
 Internally, [GNU Scientific Library](https://www.gnu.org/software/gsl/) (GSL) is used to solve polynomial equations. In order to build this from source, make sure that `gsl-config` is in the `PATH`.
 
 ```
