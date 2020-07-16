@@ -22,11 +22,45 @@ In Arch Linux, it can be installed by
 $ sudo pacman -S gsl lapack
 ```
 
+In Debian and Ubuntu,
+
+```
+$ sudo apt-get install libgsl-dev liblapack-dev
+```
+
+Otherwise, appropriately modify `CXXFLAGS` and `LIBS` in [`Makefile`](./Makefile):
+
+``` makefile
+CXXFLAGS += $(shell gsl-config --cflags)
+LIBS     += $(shell gsl-config --libs)
+```
+
 Then, build the source by running `make`. It will create the `lib` directory, and the generated library file (`libMAT.a`) will be placed there.
 
 ## How to use
 
 See the [`mat.cc`](./examples/mat.cc) file. If you want to build it, run `make examples/mat`.
+
+The library and header files can be install via `make install`. The destination directory can be set by `DESTDIR`. For example,
+
+``` makefile
+DESTDIR=/usr/local make install
+```
+
+(You may have to supply the `sudo` command with a password.) The content of installed files are:
+
+```
+├── include
+│   └── MAT
+│       ├── antler.h
+│       ├── lester_mt2_bisect.h
+│       ├── maos.h
+│       ├── matrix.h
+│       ├── momentum.h
+│       └── polynomial.h
+└── lib
+    └── libMAT.a
+```
 
 ## References
 
