@@ -1,6 +1,8 @@
 MAT
 ===
 
+[![Build Status](https://travis-ci.com/cbpark/MAT.svg?branch=master)](https://travis-ci.com/cbpark/MAT)
+
 A C++ implementation of [`mantler`](https://github.com/cbpark/mantler/), for reconstructing heavy resonances in the antler decay topology using the singularity variable.
 
 For Haskell users, see [`mantler`](https://github.com/cbpark/mantler/).
