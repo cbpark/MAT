@@ -64,7 +64,8 @@ DESTDIR=/usr/local make install
 │       ├── momentum.h
 │       └── polynomial.h
 └── lib
-    └── libMAT.a
+    ├── libMAT.a
+    └── libMAT.so
 ```
 
 ## References
