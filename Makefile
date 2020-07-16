@@ -35,7 +35,7 @@ $(LIB): $(LIBOBJ)
 	ranlib $@
 
 ifeq ($(UNAME), Darwin)
-lib: LDFLAGS += -dynamiclib
+lib: LDFLAGS += -dynamiclib -undefined dynamic_lookup
 else
 lib: LDFLAGS += -shared
 endif
