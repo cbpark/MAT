@@ -48,7 +48,11 @@ install: $(LIB) lib $(HEADERS)
 	install -d $(DESTDIR)/lib $(DESTDIR)/include/$(PKGNAME)
 	install -m755 $(SHAREDLIB) $(DESTDIR)/lib
 	install -m644 $(LIB) $(DESTDIR)/lib
+ifeq ($(UNAME), Darwin)
+	install -m644 $(HEADERS) $(DESTDIR)/include/$(PKGNAME)
+else
 	install -D -m644 $(HEADERS) $(DESTDIR)/include/$(PKGNAME)
+endif
 
 examples/%: examples/%.o $(LIB)
 	$(CXX) $(LDFLAGS) -o $@ $< $(LIB) $(LIBS)
