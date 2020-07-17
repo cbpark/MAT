@@ -11,6 +11,14 @@ addons:
   homebrew:
     packages: gsl
     update: true
+jobs:
+  include:
+    - os: osx
+      cache:
+        directories:
+          - $HOME/Library/Caches/Homebrew
+        before_cache:
+          - brew cleanup
 script:
   - make
   - make lib
