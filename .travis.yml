@@ -1,7 +1,4 @@
 language: cpp
-os:
-  - linux
-  - osx
 compiler:
   - clang
   - gcc
@@ -13,6 +10,7 @@ addons:
     update: true
 jobs:
   include:
+    - os: linux
     - os: osx
       cache:
         directories:
