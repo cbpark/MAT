@@ -15,3 +15,4 @@ script:
   - make
   - make lib
   - make examples/mat
+  - make install

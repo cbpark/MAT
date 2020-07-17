@@ -45,10 +45,10 @@ lib: $(LIBOBJ)
 	$(CXX) $(LDFLAGS) -o $(SHAREDLIB) $^
 
 install: $(LIB) lib $(HEADERS)
-	$(MKDIR) $(DESTDIR)/lib
-	cp -a $(LIB) $(SHAREDLIB) $(DESTDIR)/lib
-	$(MKDIR) $(DESTDIR)/include/$(PKGNAME)
-	cp -a $(HEADERS) $(DESTDIR)/include/$(PKGNAME)
+	install -d $(DESTDIR)/lib $(DESTDIR)/include/$(PKGNAME)
+	install -m755 $(SHAREDLIB) $(DESTDIR)/lib
+	install -m644 $(LIB) $(DESTDIR)/lib
+	install -D -m644 $(HEADERS) $(DESTDIR)/include/$(PKGNAME)
 
 examples/%: examples/%.o $(LIB)
 	$(CXX) $(LDFLAGS) -o $@ $< $(LIB) $(LIBS)
