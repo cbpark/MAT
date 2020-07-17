@@ -3,13 +3,11 @@ language: cpp
 jobs:
   include:
     - os: linux
-      compiler:
-        - clang
-        - gcc
+      compiler: gcc
+    - os: linux
+      compiler: clang
     - os: osx
-      compiler:
-        - clang
-        - gcc
+      compiler: clang
       cache:
         directories:
           - $HOME/Library/Caches/Homebrew
