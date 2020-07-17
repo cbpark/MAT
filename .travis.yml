@@ -1,22 +1,28 @@
 language: cpp
-compiler:
-  - clang
-  - gcc
+
+jobs:
+  include:
+    - os: linux
+      compiler:
+        - clang
+        - gcc
+    - os: osx
+      compiler:
+        - clang
+        - gcc
+      cache:
+        directories:
+          - $HOME/Library/Caches/Homebrew
+        before_cache:
+          - brew cleanup
+
 addons:
   apt:
     packages: libgsl-dev
   homebrew:
     packages: gsl
     update: true
-jobs:
-  include:
-    - os: linux
-    - os: osx
-      cache:
-        directories:
-          - $HOME/Library/Caches/Homebrew
-        before_cache:
-          - brew cleanup
+
 script:
   - make
   - make lib
