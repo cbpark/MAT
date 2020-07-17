@@ -15,4 +15,4 @@ script:
   - make
   - make lib
   - make examples/mat
-  - make install
+  - DESTDIR="$PWD/pkg" make install
