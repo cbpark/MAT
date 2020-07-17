@@ -70,7 +70,7 @@ DESTDIR=/usr/local make install
 
 ## References
 
-If you use this library, please cite the paper given below.
+If you use this library, please cite the [paper](https://doi.org/10.1007/JHEP07(2020)089) given below.
 
 ``` bibtex
 @article{Park:2020rol,
@@ -80,7 +80,10 @@ If you use this library, please cite the paper given below.
     archivePrefix = "arXiv",
     primaryClass = "hep-ph",
     reportNumber = "CTPU-PTC-20-14",
-    month = "5",
+    doi = "10.1007/JHEP07(2020)089",
+    journal = "JHEP",
+    volume = "07",
+    pages = "089",
     year = "2020"
 }
 ```
