@@ -68,6 +68,18 @@ DESTDIR=/usr/local make install
     └── libMAT.so
 ```
 
+Include the header file `yam2.h` in your analysis code as
+
+``` c++
+#include "yam2.h"
+```
+
+Then, build and link your analysis code (ex. `my_analysis.cc`):
+
+```
+g++ -o my_analysis my_analysis.cc -I/usr/local/include/MAT -L/usr/local/lib -lMAT
+```
+
 ## References
 
 If you use this library, please cite the [paper](https://doi.org/10.1007/JHEP07(2020)089) given below.
