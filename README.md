@@ -77,7 +77,7 @@ Include the header file `yam2.h` in your analysis code as
 Then, build and link your analysis code (ex. `my_analysis.cc`):
 
 ```
-g++ -o my_analysis my_analysis.cc -I/usr/local/include/MAT -L/usr/local/lib -lMAT
+g++ -o my_analysis my_analysis.cc -I/usr/local/include/MAT -L/usr/local/lib -lMAT -lgsl -lgslcblas
 ```
 
 ## References
